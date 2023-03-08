@@ -1,0 +1,16 @@
+{% extends 'General/base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Detalle del producto:</h1>
+<hr>
+<p><b>Nombre:</b> {{product}}</p>
+<p><b>Descripción:</b> {{product.description}}</p>
+<p><b>Precio($):</b> {{product.price}}</p>
+<p><b>Stock:</b> {{product.stock}}</p>
+<b>Imagen:</b>
+<br>
+<img src="/media/{{product.image}}" alt="{{product}}" height="150" width="150">
+<p><b>Fecha de Creación:</b> {{product.created_at}}</p>
+<p><b>Fecha de la Última modificación:</b> {{product.updated_at}}</p>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'General/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1>Productos</h1>
+    </div>
+    <div class="col-12 m-2">
+        <a class="btn btn-success" href="{% url 'product_create' %}">Agregar</a>
+    </div>
+    <div class="col-12">
+        <table class="table table-striped-columns">
+            <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Foto</th>
+                  <th scope="col">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for product in products %}
+                <tr>
+                  <th scope="row">{{forloop.counter}}</th>
+                  <td>{{product}}</td>
+                  <td class="text-center"><img src="media/{{product.image}}" alt="Producto {{product.id}}" height="100" width="75"></td>
+                  <td>
+                    <a href="{% url 'product_update' product.id %}" class="btn btn-primary">Editar</a>
+                    <a href="{% url 'product_detail' product.id %}" class="btn btn-success">Ver</a>
+                    <a onclick="confirmDelete('{% url 'product_delete' product.id %}')" class="btn btn-danger">Eliminar</a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+  const confirmDelete = (url) => {
+    swal({
+      title: "¿Estás seguro?",
+      text: "Una vez eliminado el producto, ya no se podrá recuperar",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        alert("Hola");
+        window.location.href = url;
+      }
+    });
+  }
+</script>
+{% endblock %}
